@@ -9,9 +9,11 @@ Infrastructure as Code (IaC) for managing Snowflake account resources using Terr
 | Database | `TF_DEMO_DB` | Main database |
 | Schema | `TF_DEMO_SCHEMA` | Default schema in the database |
 | Warehouse | `TF_DEMO_WH` | XS virtual warehouse (auto-suspend 60s) |
-| Role | `TF_DEMO_ROLE` | Application role with SELECT on tables |
+| Role | `TF_DEMO_DB_TF_DEMO_SCHEMA_READ` | Read-only: SELECT on tables and views |
+| Role | `TF_DEMO_DB_TF_DEMO_SCHEMA_DDL` | DDL: CREATE, ALTER, DROP schema objects |
+| Role | `TF_DEMO_DB_TF_DEMO_SCHEMA_DML` | DML: INSERT, UPDATE, DELETE, TRUNCATE |
 | User | `TF_DEMO_USER` | Service user with RSA key authentication |
-| Grants | Various | USAGE on DB/Schema/WH, SELECT on current + future tables |
+| Grants | Various | USAGE on DB/Schema/WH + role-specific privileges |
 
 ## Project Structure
 
@@ -110,13 +112,6 @@ Then remove the service user in Snowflake:
 USE ROLE ACCOUNTADMIN;
 DROP USER IF EXISTS TERRAFORM_SVC;
 ```
-
-## Snowflake Account
-
-| Field | Value |
-|-------|-------|
-| Account Identifier | `JLCUCPS-NC57185` |
-| Console | https://jlcucps-nc57185.snowflakecomputing.com |
 
 ## References
 

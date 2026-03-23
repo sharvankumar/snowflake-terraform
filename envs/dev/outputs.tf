@@ -16,9 +16,19 @@ output "warehouse_name" {
   value       = snowflake_warehouse.main.name
 }
 
-output "role_name" {
-  description = "Name of the created role"
-  value       = snowflake_account_role.app_role.name
+output "role_read" {
+  description = "Name of the READ role"
+  value       = snowflake_account_role.read.name
+}
+
+output "role_ddl" {
+  description = "Name of the DDL role"
+  value       = snowflake_account_role.ddl.name
+}
+
+output "role_dml" {
+  description = "Name of the DML role"
+  value       = snowflake_account_role.dml.name
 }
 
 output "user_name" {
