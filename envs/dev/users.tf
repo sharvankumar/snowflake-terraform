@@ -11,7 +11,7 @@ resource "tls_private_key" "app_user_key" {
 # -------------------------------------------------------
 resource "snowflake_user" "app_user" {
   provider          = snowflake.useradmin
-  name              = "${var.project_prefix}_USER"
+  name              = var.service_user_name
   default_warehouse = snowflake_warehouse.main.name
   default_role      = snowflake_account_role.read.name
   default_namespace = "${snowflake_database.main.name}.${snowflake_schema.main.fully_qualified_name}"

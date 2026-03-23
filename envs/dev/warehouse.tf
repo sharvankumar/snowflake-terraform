@@ -2,7 +2,7 @@
 # Virtual Warehouse
 # -------------------------------------------------------
 resource "snowflake_warehouse" "main" {
-  name                      = "${var.project_prefix}_WH"
+  name                      = var.warehouse_name
   warehouse_type            = "STANDARD"
   warehouse_size            = var.warehouse_size
   max_cluster_count         = 1

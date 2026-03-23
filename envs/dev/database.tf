@@ -2,7 +2,7 @@
 # Database
 # -------------------------------------------------------
 resource "snowflake_database" "main" {
-  name         = "${var.project_prefix}_DB"
+  name         = var.database_name
   is_transient = false
 }
 
@@ -10,7 +10,7 @@ resource "snowflake_database" "main" {
 # Schema
 # -------------------------------------------------------
 resource "snowflake_schema" "main" {
-  name                = "${var.project_prefix}_SCHEMA"
+  name                = var.schema_name
   database            = snowflake_database.main.name
   with_managed_access = false
 }

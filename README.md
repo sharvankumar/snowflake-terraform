@@ -1,18 +1,18 @@
-# Snowflake Terraform
+# Snowflake Terraform — E-Commerce Analytics
 
-Infrastructure as Code (IaC) for managing Snowflake account resources using Terraform.
+Infrastructure as Code (IaC) for managing a Snowflake e-commerce analytics platform using Terraform.
 
 ## What This Creates
 
 | Resource | Name | Description |
 |----------|------|-------------|
-| Database | `TF_DEMO_DB` | Main database |
-| Schema | `TF_DEMO_SCHEMA` | Default schema in the database |
-| Warehouse | `TF_DEMO_WH` | XS virtual warehouse (auto-suspend 60s) |
-| Role | `TF_DEMO_DB_TF_DEMO_SCHEMA_READ` | Read-only: SELECT on tables and views |
-| Role | `TF_DEMO_DB_TF_DEMO_SCHEMA_DDL` | DDL: CREATE, ALTER, DROP schema objects |
-| Role | `TF_DEMO_DB_TF_DEMO_SCHEMA_DML` | DML: INSERT, UPDATE, DELETE, TRUNCATE |
-| User | `TF_DEMO_USER` | Service user with RSA key authentication |
+| Database | `ECOM_ANALYTICS` | Central analytics database for e-commerce data |
+| Schema | `SALES` | Orders, transactions, revenue, customer purchase data |
+| Warehouse | `ECOM_ANALYTICS_WH` | XS compute warehouse for analytics queries and BI |
+| Role | `ECOM_ANALYTICS_SALES_READ` | Read-only: SELECT on tables and views |
+| Role | `ECOM_ANALYTICS_SALES_DDL` | DDL: CREATE, ALTER, DROP schema objects |
+| Role | `ECOM_ANALYTICS_SALES_DML` | DML: INSERT, UPDATE, DELETE, TRUNCATE |
+| User | `ECOM_ANALYTICS_SVC` | Service user with RSA key authentication |
 | Grants | Various | USAGE on DB/Schema/WH + role-specific privileges |
 
 ## Project Structure

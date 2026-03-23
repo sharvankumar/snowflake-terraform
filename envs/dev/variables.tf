@@ -25,7 +25,7 @@ variable "snowflake_private_key_path" {
 }
 
 # -------------------------------------------------------
-# Resource Naming
+# Environment
 # -------------------------------------------------------
 
 variable "environment" {
@@ -34,10 +34,28 @@ variable "environment" {
   default     = "dev"
 }
 
-variable "project_prefix" {
-  description = "Prefix for all Snowflake object names"
+# -------------------------------------------------------
+# Snowflake Object Names
+# -------------------------------------------------------
+
+variable "database_name" {
+  description = "Name of the Snowflake database"
   type        = string
-  default     = "TF_DEMO"
+}
+
+variable "schema_name" {
+  description = "Name of the schema within the database"
+  type        = string
+}
+
+variable "warehouse_name" {
+  description = "Name of the virtual warehouse"
+  type        = string
+}
+
+variable "service_user_name" {
+  description = "Name of the application service user"
+  type        = string
 }
 
 # -------------------------------------------------------
