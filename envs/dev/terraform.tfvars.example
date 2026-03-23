@@ -1,0 +1,11 @@
+# Copy this file to terraform.tfvars and fill in your values
+# WARNING: Never commit terraform.tfvars to version control
+
+snowflake_organization_name = "JLCUCPS"
+snowflake_account_name      = "NC57185"
+snowflake_user              = "TERRAFORM_SVC"
+snowflake_private_key_path  = "~/.ssh/snowflake_tf_snow_key.p8"
+
+environment    = "dev"
+project_prefix = "TF_DEMO"
+warehouse_size = "XSMALL"
