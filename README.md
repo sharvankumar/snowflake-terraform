@@ -63,19 +63,45 @@ brew tap hashicorp/tap && brew install hashicorp/tap/terraform
 ./scripts/generate-keys.sh
 ```
 
-### 3. Create Snowflake Service User
+### 3. Get Your Snowflake Account Identifier
 
-Run the SQL in `scripts/snowflake-service-user.sql` in the Snowflake console as `ACCOUNTADMIN`. See [docs/02-snowflake-account-setup.md](docs/02-snowflake-account-setup.md) for details.
+Run this SQL in the Snowflake console to get your org and account names:
 
-### 4. Configure Variables
+```sql
+SELECT CURRENT_ORGANIZATION_NAME() AS organization_name,
+       CURRENT_ACCOUNT_NAME()      AS account_name;
+```
+
+These map to your console URL as: `https://<org>-<account>.snowflakecomputing.com`
+
+### 4. Create Snowflake Service User
+
+Run the SQL in `scripts/snowflake-service-user.sql` in the Snowflake console as `ACCOUNTADMIN`. The script walks you through each step. See [docs/02-snowflake-account-setup.md](docs/02-snowflake-account-setup.md) for full details.
+
+### 5. Configure Variables
 
 ```bash
 cd envs/dev
 cp terraform.tfvars.example terraform.tfvars
-# Edit terraform.tfvars with your values
 ```
 
-### 5. Initialize & Apply
+Edit `terraform.tfvars` with the values from step 3:
+
+| Variable | Where to get it | Example |
+|---|---|---|
+| `snowflake_organization_name` | `CURRENT_ORGANIZATION_NAME()` or URL before the hyphen | `JLCUCPS` |
+| `snowflake_account_name` | `CURRENT_ACCOUNT_NAME()` or URL after the hyphen | `NC57185` |
+| `snowflake_user` | The service user created in step 4 | `TERRAFORM_SVC` |
+| `snowflake_private_key_path` | Path to private key from step 2 | `~/.ssh/snowflake_tf_snow_key.p8` |
+| `database_name` | Your choice | `ECOM_ANALYTICS` |
+| `schema_name` | Your choice | `SALES` |
+| `warehouse_name` | Your choice | `ECOM_ANALYTICS_WH` |
+| `service_user_name` | Your choice | `ECOM_ANALYTICS_SVC` |
+| `warehouse_size` | `XSMALL` / `SMALL` / `MEDIUM` / `LARGE` / `XLARGE` | `XSMALL` |
+
+> **Note:** `terraform.tfvars` is git-ignored and never committed. The `.tfvars.example` file serves as a safe-to-commit template.
+
+### 6. Initialize & Apply
 
 ```bash
 cd envs/dev
